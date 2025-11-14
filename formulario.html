@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Preenchimento de Formulário</title>
+  <link rel="stylesheet" href="formulario.css">
+</head>
+<body>
+  <main class="container">
+    <form id="formulario">
+      <h2>Formulário de Solicitação</h2>
+
+      <div class="campo">
+        <label for="nome">Nome Completo:</label>
+        <input type="text" id="nome" placeholder="Digite seu nome" required>
+      </div>
+
+      <div class="campo">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" placeholder="Digite seu e-mail" required>
+      </div>
+
+      <div class="campo">
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
+      </div>
+
+      <div class="campo">
+        <label for="assunto">Assunto:</label>
+        <input type="text" id="assunto" placeholder="Ex: Solicitação de suporte" required>
+      </div>
+
+      <div class="campo">
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" rows="4" placeholder="Descreva sua solicitação..." required></textarea>
+      </div>
+
+      <button type="submit">Enviar Formulário</button>
+      <p class="mensagem" id="mensagem-resultado"></p>
+    </form>
+  </main>
+
+  <script src="formulario.js"></script>
+</body>
+</html>
