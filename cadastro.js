@@ -1,56 +1,56 @@
-// Adiciona um "ouvinte de evento" (event listener) no formulário
-// Assim, quando o usuário clicar em "Cadastrar Usuário", esta função será executada
-document.getElementById("cadastroForm").addEventListener("submit", function(event) {
-  // Impede o envio padrão do formulário (que recarregaria a página)
-  event.preventDefault();
+// Adiciona um "ouvinte" de evento para o formulário.
+// Quando o formulário for enviado (submit), esta função será executada.
+document.getElementById("cadastroForm").addEventListener("submit", async function(event) {
 
-  // Captura os valores digitados nos campos do formulário
-  const nome = document.getElementById("nome").value;
-  const email = document.getElementById("email").value;
-  const idade = document.getElementById("idade").value;
-  const genero = document.getElementById("genero").value;
-  const senha = document.getElementById("senha").value;
-  const confirmarSenha = document.getElementById("confirmarSenha").value;
+    // Impede que a página recarregue automaticamente ao enviar o formulário.
+    // Isso é fundamental para trabalhar com fetch() sem perder os dados.
+    event.preventDefault();
 
-  // Elemento onde serão exibidas mensagens de erro ou sucesso
-  const mensagem = document.getElementById("mensagem");
+    // Captura os valores digitados nos campos do formulário.
+    const nome = document.getElementById("nome").value;
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("senha").value;
 
-  //  Validação: verifica se as senhas são iguais
-  if (senha !== confirmarSenha) {
-    mensagem.textContent = "As senhas não conferem!";
-    mensagem.style.color = "red";
-    return; // Interrompe a execução aqui se estiver errado
-  }
+    // Pega o elemento onde será exibida a mensagem de sucesso ou erro.
+    const mensagem = document.getElementById("mensagem");
 
-  //  Obtém os usuários já cadastrados no localStorage
-  // Se não existir nenhum, cria uma lista vazia
-  const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+    // Cria um objeto JavaScript com os dados do usuário.
+    // Esse objeto será convertido em JSON para enviar ao backend.
+    const usuario = { nome, email, senha };
 
-  //  Verifica se o e-mail já está cadastrado
-  const emailJaExiste = usuarios.some(u => u.email === email);
-  if (emailJaExiste) {
-    mensagem.textContent = "E-mail já cadastrado!";
-    mensagem.style.color = "red";
-    return;
-  }
+    try {
 
-  //  Cria um novo objeto de usuário com os dados preenchidos
-  const novoUsuario = {
-    nome,
-    email,
-    idade,
-    genero,
-    senha
-  };
+        // Faz a requisição HTTP POST para a API do Spring Boot.
+        // Aqui enviamos o usuário como JSON dentro do "body".
+        const response = await fetch("http://localhost:8080/api/usuarios/cadastrar", {
+            method: "POST",                         // Tipo da requisição
+            headers: { "Content-Type": "application/json" }, // Indica que o corpo é JSON
+            body: JSON.stringify(usuario)           // Converte o objeto em JSON
+        });
 
-  // Adiciona o novo usuário à lista e salva novamente no localStorage
-  usuarios.push(novoUsuario);
-  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        // Verifica se a resposta da API foi bem-sucedida (status 200–299).
+        if (response.ok) {
 
-  // ✅ Exibe mensagem de sucesso
-  mensagem.textContent = "Usuário cadastrado com sucesso!";
-  mensagem.style.color = "green";
+            // Mostra mensagem de sucesso ao usuário.
+            mensagem.textContent = "Usuário cadastrado com sucesso!";
+            mensagem.style.color = "green";
 
-  // 🧹 Limpa todos os campos do formulário
-  document.getElementById("cadastroForm").reset();
+            // Limpa os campos do formulário após enviar.
+            document.getElementById("cadastroForm").reset();
+
+        } else {
+            // Caso o servidor responda com erro (400, 500, etc.)
+            mensagem.textContent = "Erro ao cadastrar!";
+            mensagem.style.color = "red";
+        }
+
+    } catch (error) {
+        // Este bloco captura erros de conexão, como:
+        // servidor desligado, URL errada, internet caída, etc.
+        mensagem.textContent = "Erro ao conectar com o servidor!";
+        mensagem.style.color = "red";
+
+        // Mostra o erro no console para fins de depuração.
+        console.error(error);
+    }
 });
