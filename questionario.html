@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionário </title>
+    <link rel="stylesheet" href="questionario.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Questionário  - Sistema Solar</h1>
+
+    <form id="formQuestionario">
+
+        <label>Seu nome:</label>
+        <input type="text" id="nomeUsuario" required>
+
+        <label>Qual seu planeta favorito?</label>
+        <select id="planetaFavorito" required>
+            <option value="">Selecione...</option>
+            <option>Mercúrio</option>
+            <option>Vênus</option>
+            <option>Terra</option>
+            <option>Marte</option>
+            <option>Júpiter</option>
+            <option>Saturno</option>
+            <option>Urano</option>
+            <option>Netuno</option>
+        </select>
+
+        <label>Nível de conhecimento sobre astronomia:</label>
+        <select id="nivelConhecimento" required>
+            <option value="">Selecione...</option>
+            <option>Iniciante</option>
+            <option>Intermediário</option>
+            <option>Avançado</option>
+        </select>
+
+        <label>Você gosta de astronomia?</label>
+        <select id="gostaAstronomia" required>
+            <option value="">Selecione...</option>
+            <option>Sim</option>
+            <option>Não</option>
+        </select>
+
+        <label>Curiosidade favorita sobre o espaço:</label>
+        <textarea id="curiosidade" rows="4" required></textarea>
+
+        <button type="submit">Enviar Questionário</button>
+
+        <p id="mensagem"></p>
+    </form>
+</div>
+
+<script src="questionario.js"></script>
+</body>
+</html>

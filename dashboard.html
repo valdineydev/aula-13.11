@@ -1,11 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>estou em construção</title>
+    <title>Dashboard - Sistema Solar</title>
+    <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <h1>vou existir na proxima aula</h1>
+    <div class="container">
+
+        <header class="top-bar">
+            <div class="logo">
+                <span class="logo-mark">☄</span>
+                <span class="logo-text">Valdiney</span>
+            </div>
+            <div class="top-info">
+                <span class="tag">Modo Futurista</span>
+                <span class="tag">Versão 1.0</span>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div>
+                <h1>Dashboard do Sistema Solar</h1>
+                <p>
+                    Visualize informações genéricas sobre os planetas em um painel 
+                    de estilo futurista, perfeito para demonstrar integração front-end.
+                </p>
+
+                <!-- BOTÃO FUTURISTA -->
+                <button id="btn-questionario" class="btn-questionario">
+                    Acessar Questionário
+                </button>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-label">Planetas</span>
+                    <span class="stat-value" id="total-planetas">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Estrelas</span>
+                    <span class="stat-value">1</span>
+                    <span class="stat-note">Sol</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Tipo</span>
+                    <span class="stat-value">Estelar</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid-section">
+            <h2>Planetas do Sistema Solar</h2>
+            <p class="section-subtitle">
+                Dados genéricos apenas para demonstração (nome, ordem, tipo, curiosidade).
+            </p>
+
+            <div id="planetas-grid" class="cards-grid">
+                <!-- JS vai preencher -->
+            </div>
+        </section>
+
+        <footer class="footer">
+            <span>Dashboard de exemplo • HTML + CSS + JS</span>
+            <button id="btn-refresh">Recarregar dados</button>
+        </footer>
+
+    </div>
+
+    <script src="dashboard.js"></script>
 </body>
 </html>
